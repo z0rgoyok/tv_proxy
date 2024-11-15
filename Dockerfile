@@ -17,7 +17,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копирование кода приложения
-COPY proxy_server.py .
+COPY main.py .
 
 # Пользователь без привилегий
 USER nobody
