@@ -30,4 +30,4 @@ CMD gunicorn \
     --bind 0.0.0.0:5001 \
     --access-logfile /var/log/m3u8proxy/access.log \
     --error-logfile /var/log/m3u8proxy/error.log \
-    proxy_server:app
+    main:app
