@@ -1,29 +1,33 @@
 FROM python:3.10-slim
 
-# Установка необходимых пакетов
+# Install necessary packages
 RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Создание рабочей директории
+# Create working directory
 WORKDIR /app
 
-# Создание директории для логов
+# Create logs directory and files with proper permissions
 RUN mkdir -p /var/log/m3u8proxy && \
+    touch /var/log/m3u8proxy/access.log && \
+    touch /var/log/m3u8proxy/error.log && \
     chown -R nobody:nogroup /var/log/m3u8proxy && \
-    chmod 777 /var/log/m3u8proxy
+    chmod -R 777 /var/log/m3u8proxy && \
+    chmod 666 /var/log/m3u8proxy/access.log && \
+    chmod 666 /var/log/m3u8proxy/error.log
 
-# Копирование зависимостей
+# Copy dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование кода приложения
+# Copy application code
 COPY main.py .
 
-# Пользователь без привилегий
+# Switch to non-root user
 USER nobody
 
-# Команда запуска
+# Run command
 CMD gunicorn \
     --workers ${WORKERS:-4} \
     --timeout ${TIMEOUT:-300} \
