@@ -10,7 +10,8 @@ WORKDIR /app
 
 # Создание директории для логов
 RUN mkdir -p /var/log/m3u8proxy && \
-    chown -R nobody:nogroup /var/log/m3u8proxy
+    chown -R nobody:nogroup /var/log/m3u8proxy && \
+    chmod 777 /var/log/m3u8proxy
 
 # Копирование зависимостей
 COPY requirements.txt .

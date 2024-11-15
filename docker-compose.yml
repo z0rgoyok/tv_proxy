@@ -9,7 +9,7 @@ services:
       - "5001:5001"
     restart: always
     volumes:
-      - ./logs:/var/log/m3u8proxy
+      - ./logs:/var/log/m3u8proxy:rw
     environment:
       - WORKERS=4
       - TIMEOUT=300
