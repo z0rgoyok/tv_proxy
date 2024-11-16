@@ -11,7 +11,7 @@ services:
     volumes:
       - ./logs:/var/log/m3u8proxy:rw
     environment:
-      - WORKERS=4
+      - WORKERS=1
       - TIMEOUT=300
       - MAX_REQUESTS=1000
     deploy:
