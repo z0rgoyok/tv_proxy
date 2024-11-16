@@ -11,13 +11,13 @@ services:
     volumes:
       - ./logs:/var/log/m3u8proxy:rw
     environment:
-      - WORKERS=1
+      - WORKERS=4
       - TIMEOUT=300
       - MAX_REQUESTS=1000
     deploy:
       resources:
         limits:
-          cpus: '2'
+          cpus: '0.5'
           memory: 2G
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
